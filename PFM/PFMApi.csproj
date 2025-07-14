@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="13.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="NewFolder\" />
+	<ProjectReference Include="..\PFM.Application\PFM.Application.csproj" />
+	<ProjectReference Include="..\PFM.Domain\PFM.Domain.csproj" />
   </ItemGroup>
 	
 </Project>

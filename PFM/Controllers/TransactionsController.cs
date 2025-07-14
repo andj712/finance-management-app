@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PFM.Application.Queries.GetMessage; 
 using PFM.Services;
 
 namespace PFM.Controllers
@@ -8,15 +10,16 @@ namespace PFM.Controllers
     [ApiController]
     public class TransactionsController : ControllerBase
     {
-        private readonly TransactionService _transactionService;
-        public TransactionsController(TransactionService transactionService)
+        private readonly IMediator _mediator;
+
+        public TransactionsController(IMediator mediator)
         {
-            _transactionService = transactionService;
+            _mediator = mediator;
         }
         [HttpGet("message")]
         public IActionResult GetMessage()
         {
-            var message = _transactionService.Message();
+            var message = _mediator.Send(new GetMessageQuery());
             return Ok(message);
         }
     }

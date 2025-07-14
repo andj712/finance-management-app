@@ -1,4 +1,7 @@
 using System.Net.Security;
+using System.Reflection;
+using Microsoft.OpenApi.Writers;
+using PFM.Application.Queries.GetMessage;
 using PFM.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<TransactionService>();  // <-- Add this line
+
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(PFM.Application.AssemblyMarker).Assembly));
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
