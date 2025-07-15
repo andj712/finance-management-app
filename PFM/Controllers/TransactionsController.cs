@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PFM.Application.Queries.GetMessage; 
-using PFM.Services;
+using PFM.Application.UseCases.Queries.GetMessage; 
+
 
 namespace PFM.Controllers
 {

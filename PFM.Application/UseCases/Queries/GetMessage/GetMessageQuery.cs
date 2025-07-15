@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace PFM.Application.Queries.GetMessage
+namespace PFM.Application.UseCases.Queries.GetMessage
 {
     public record GetMessageQuery() : IRequest<string>;
 }

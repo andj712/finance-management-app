@@ -1,15 +1,21 @@
-using System.Net.Security;
+﻿using System.Net.Security;
 using System.Reflection;
 using Microsoft.OpenApi.Writers;
-using PFM.Application.Queries.GetMessage;
-using PFM.Services;
+using PFM.Application.UseCases.Queries.GetMessage;
+using PFM.Infrastructure.Persistance;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<TransactionService>();  // <-- Add this line
+
+builder.Services.AddDbContext<PFMDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PFM")));
+
 
 
 builder.Services.AddMediatR(cfg =>
