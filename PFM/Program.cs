@@ -1,10 +1,11 @@
-﻿using System.Net.Security;
-using System.Reflection;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Writers;
-using PFM.Application.UseCases.Queries.GetMessage;
-using PFM.Infrastructure.Persistance;
-using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using PFM.Application.UseCases.Queries.GetMessage;
+using PFM.Domain.Interfaces;
+using PFM.Infrastructure.Persistance.DbContexts;
+using System.Net.Security;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<PFMDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PFM")));
-
+builder.Services.AddScoped<IUnitOfWork>(sp => (IUnitOfWork)sp.GetRequiredService<PFMDbContext>());
 
 
 builder.Services.AddMediatR(cfg =>

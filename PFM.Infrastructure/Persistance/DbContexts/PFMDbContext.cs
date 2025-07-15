@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PFM.Domain.Entities;
 
-namespace PFM.Infrastructure.Persistance
+namespace PFM.Infrastructure.Persistance.DbContexts
 {
     public class PFMDbContext:DbContext
     {
@@ -14,6 +14,8 @@ namespace PFM.Infrastructure.Persistance
 
         public DbSet<Transaction> Transactions => Set<Transaction>();
 
+        public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        => base.SaveChangesAsync(cancellationToken);
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Transaction>(entity =>
